@@ -23,6 +23,10 @@
         <!-- custom Css-->
         <link href="{% static 'base/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
 
+        {% comment %} <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> {% endcomment %}
+        <link rel="stylesheet" type="text/css" href="{% static 'base/libs/DataTables/datatables.min.css' %}"/>
+      
+
     </head>
 
     <body>
@@ -842,7 +846,7 @@
                 <!-- LOGO -->
                 <div class="navbar-brand-box">
                     <!-- Dark Logo-->
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="{% url 'bases:home' %}" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="{% static 'base/images/logo-sm.png' %}" alt="" height="22">
                         </span>
@@ -851,7 +855,7 @@
                         </span>
                     </a>
                     <!-- Light Logo-->
-                    <a href="index.html" class="logo logo-light">
+                    <a href="{% url 'bases:home' %}" class="logo logo-light">
                         <span class="logo-sm">
                             <img src="{% static 'base/images/logo-sm.png' %}" alt="" height="22">
                         </span>
@@ -872,16 +876,21 @@
                         <div id="two-column-menu">
                         </div>
                         <ul class="navbar-nav" id="navbar-nav">
-                            <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                            <li class="menu-title"><span data-key="t-menu">Catálogos de inventario</span></li>
                             <li class="nav-item">
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link" href="{% url 'bases:home' %}">
+                                        <i class="ri-dashboard-2-line"></i> <span data-key="t-widgets">Dashboard</span>
+                                    </a>
+                                </li>
                                 <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
                                     aria-expanded="false" aria-controls="sidebarDashboards">
-                                    <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
+                                    <i class="ri-stack-line"></i> <span data-key="t-dashboards">Catálogos</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="sidebarDashboards">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
-                                            <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics"> Analytics
+                                            <a href="{% url 'inv:categoria_list' %}" class="nav-link" data-key="t-analytics"> Categorías
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -1518,12 +1527,6 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="widgets.html">
-                                    <i class="ri-honour-line"></i> <span data-key="t-widgets">Widgets</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
                                     aria-expanded="false" aria-controls="sidebarForms">
                                     <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Forms</span>
@@ -1803,7 +1806,7 @@
                 <div class="page-content">
                     
                     <div class="container-fluid">
-
+                        
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
@@ -2389,6 +2392,13 @@
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+        </script>
+        {% comment %} <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> {% endcomment %}
+        <script type="text/javascript" src="{% static 'base/libs/DataTables/datatables.min.js' %}"></script>
+        
         <!-- JAVASCRIPT -->
         <script src="{% static 'base/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'base/libs/simplebar/simplebar.min.js' %}"></script>
@@ -2396,6 +2406,7 @@
         <script src="{% static 'base/libs/feather-icons/feather.min.js' %}"></script>
         <script src="{% static 'base/js/pages/plugins/lord-icon-2.1.0.js' %}"></script>
         <script src="{% static 'base/js/plugins.js' %}"></script>
+        
         
         <!-- App js -->
         <script src="{% static 'base/js/app.js' %}"></script>
