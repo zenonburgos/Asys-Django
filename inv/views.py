@@ -236,6 +236,8 @@ class ProductoNew(LoginRequiredMixin,
     
     def get_context_data(self, **kwargs):
         context = super(ProductoNew, self).get_context_data(**kwargs)
+        context["categorias"] = Categoria.objects.all()
+        context["subcategorias"] = SubCategoria.objects.all()
         context['action'] = 'A'
         return context
 

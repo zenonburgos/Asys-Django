@@ -1,50 +1,201 @@
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-header bg-light p-3">
-            <h5 class="modal-title" id="exampleModalLabel"></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                id="close-modal"></button>
-        </div>
-        {% if obj %}
-        <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_edit' obj.pk %}" >
-        {% else %}
-        <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_new' %}" >
-        {% endif %}
-        {% csrf_token %}
-            {% for field in form %}
-                <div class="modal-body">
-                    
-                    <div class="row">
-                        {% comment %} <div class="col-6">
-                            <div class="mb-3">
-                                <label for="compnayNameinput" class="form-label">Modelo</label>
-                                <input type="text" class="form-control" placeholder="Ingrese Modelo" name="modelo" id="id_modelo">                            
-                            </div>
-                        </div><!--end col-->
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="lastNameinput" class="form-label">Código de Barra</label>
-                                <input type="text" class="form-control" placeholder="Ingrese Código de Barra" name="codigo_barra" id="id_codigo_barra">
-                            </div>
-                        </div><!--end col-->
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label for="firstNameinput" class="form-label">Descripción</label>
-                                <input type="text" class="form-control" placeholder="Ingrese descripción" name="descripcion" id="iddescripcion">
-                            </div>
-                        </div><!--end col--> {% endcomment %}
-                        
-                        {{form.as_p}}
-                        
-                    </div><!--end row-->
-                </div>
-                <div class="modal-footer">
-                    <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" id="add-btn">Guardar</button>                    
+{% extends 'base/base.html' %}
+
+{% block page_content %}
+
+{% load static %}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">
+                            {% if obj %} Editar {% else %} Crear {% endif %} Producto
+                        </h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Nuevo Producto</li>
+                            </ol>
+                        </div>
+
                     </div>
                 </div>
-            {% endfor %}
-        </form>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-lg-8">
+                    {% if obj %}
+                    <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_edit' obj.pk %}" >
+                    {% else %}
+                    <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_new' %}" >
+                    {% endif %}
+                    {% csrf_token %}
+                        <div class="card">
+                            <div class="card-body">
+                                {% comment %} {{form.as_p}} {% endcomment %}
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.codigo.label}}</div>
+                                        <div class="col-md-6">{{form.codigo}}</div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.codigo_barra.label}}</div>
+                                        <div class="col-md-6">{{form.codigo_barra}}</div>    
+                                    </div>                            
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.descripcion.label}}</div>
+                                        <div class="col-md-6">{{form.descripcion}}</div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.estado.label}}</div>
+                                        <div class="col-md-6">{{form.estado}}</div>    
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.afecta.label}}</div>
+                                        <div class="col-md-6">{{form.afecta}}</div>    
+                                    </div>    
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.formatos.label}}</div>
+                                        <div class="col-md-6">{{form.formatos}}</div>    
+                                    </div>    
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.listapre.label}}</div>
+                                        <div class="col-md-6">{{form.listapre}}</div>    
+                                    </div>                                
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.costo.label}}</div>
+                                        <div class="col-md-6">{{form.costo}}</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.precio.label}}</div>
+                                        <div class="col-md-6">{{form.precio}}</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.precio_2.label}}</div>
+                                        <div class="col-md-6">{{form.precio_2}}</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.precio_3.label}}</div>
+                                        <div class="col-md-6">{{form.precio_3}}</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.factor.label}}</div>
+                                        <div class="col-md-6">{{form.factor}}</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.factor_2.label}}</div>
+                                        <div class="col-md-6">{{form.factor_2}}</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.factor_3.label}}</div>
+                                        <div class="col-md-6">{{form.factor_3}}</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">{{form.existencia.label}}</div>
+                                        <div class="col-md-6">{{form.existencia}}</div>    
+                                    </div>                            
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="col-md-6">{{form.ultima_compra.label}}</div>
+                                        <div class="col-md-6">{{form.ultima_compra}}</div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="col-md-6">{{form.marca.label}}</div>
+                                        <div class="col-md-6">{{form.marca}}</div>    
+                                    </div>     
+                                    <div class="col-md-4">
+                                        <div class="col-md-6">{{form.unidad_medida.label}}</div>
+                                        <div class="col-md-6">{{form.unidad_medida}}</div>    
+                                    </div>                        
+                                            
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">Categoría</div>
+                                        <div class="col-md-6">
+                                            <select name="categoria" id="id_categoria" class="form-control from-control-sm">
+                                                <option value="0">-------</option>
+                                                {% for item in categorias %}
+                                                <option value="{{item.id}}">{{item.descripcion}}</option>
+                                                {% endfor%}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">Sub Categoría</div>
+                                        <div class="col-md-6">
+                                            <select name="subcategoria" id="id_subcategoria" class="form-control from-control-sm">
+                                                <option value="0">-------</option>
+                                                {% for item in subcategorias %}
+                                                <option value="{{item.id}}" data-chained="{{item.categoria.id}}">{{item.descripcion}}</option>
+                                                {% endfor%}
+                                            </select>
+                                        </div>
+                                    </div>                           
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                        <div class="text-end mb-3">
+                            <a href="{% url 'inv:subcategoria_list' %}" class="btn btn-light"> Cancelar</a>
+                            <button type="submit" class="btn btn-success w-sm"> Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+
+        </div>
+        <!-- container-fluid -->
     </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script> © Velzon.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Design & Develop by Themesbrand
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
+<!-- end main content-->
+
+{% endblock %}
+{% block js_page %}
+
+        <!-- choices.js -->
+        <script type='text/javascript' src="{% static 'base/libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- App js -->
+        <script src="{% static 'base/js/app.js' %}"></script>
+
+{% endblock %}

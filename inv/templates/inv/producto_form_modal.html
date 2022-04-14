@@ -1,0 +1,78 @@
+
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bg-light p-3">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                id="close-modal"></button>
+        </div>
+        {% if obj %}
+        <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_edit' obj.pk %}" >
+        {% else %}
+        <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_new' %}" >
+        {% endif %}
+        {% csrf_token %}
+            
+                <div class="modal-body">
+                    
+                    <div class="row">
+                    
+                        {% comment %} <div class="col-6">
+                            <div class="mb-3">
+                                <label for="id_codigoS" class="form-label">Código</label>
+                                <input type="text" class="form-control" placeholder="Ingrese su Código Interno de Producto" name="codigo" id="id_codigo">                                
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="id_codigo_barraS" class="form-label">Código de Barra</label>
+                                <input type="text" class="form-control" placeholder="Ingrese Código de Barra" name="codigo_barra" id="id_codigo_barra">
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="id_descripcionS" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" placeholder="Ingrese descripción" name="descripcion" id="id_descripcion">
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="id_marcaS" class="form-label">Marca</label>
+                                <input type="text" class="form-control" placeholder="Ingrese Marca de producto" name="marca" id="id_marca">
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="id_modeloS" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" placeholder="Ingrese Modelo asignado por el fabricante, si aplica" name="modelo" id="id_modelo">
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-12">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="estado" id="id_estado" 
+                                {% if obj.estado %} checked {% endif %}
+                                {% if action|stringformat:'s' == 'A' %} checked {% endif %}>
+
+                                <label class="form-check-label" for="formCheck6">
+                                    Estado
+                                </label>
+                            </div>
+                        </div><!--end col--> {% endcomment %}
+                        
+                        {{form.as_p}}
+
+                        <input class="form-control" data-choices data-choices-text-unique-true type="text" value="Project-A, Project-B" />
+                    </div><!--end row-->
+                    
+                </div>
+            
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" id="add-btn">Guardar</button>                    
+                    </div>
+                </div>
+            
+        </form>
+    </div>
+</div>

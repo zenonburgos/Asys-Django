@@ -77,7 +77,7 @@ class Producto(ClaseModelo):
         max_length=20,
         unique=True
     )
-    codigo_barra = models.CharField(max_length=50)
+    codigo_barra = models.CharField(max_length=50, null=True, blank=True)
     descripcion = models.CharField(max_length=200)
     modelo = models.CharField(max_length=50, null=True, blank=True)
     costo = models.FloatField(default=0)

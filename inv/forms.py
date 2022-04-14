@@ -78,7 +78,7 @@ class ProductoForm(forms.ModelForm):
                 'afecta', 'listapre', 'formatos', 'tags']
         exclude = ['um','fm','uc','fc']
         widget={'descripcion': forms.TextInput()}
-
+        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
@@ -87,3 +87,8 @@ class ProductoForm(forms.ModelForm):
             })
         self.fields['ultima_compra'].widget.attrs['readonly'] = True
         self.fields['existencia'].widget.attrs['readonly'] = True
+        self.fields['afecta'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['listapre'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['formatos'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['estado'].widget.attrs.update({'class': 'form-check-input'})
+        

@@ -41,11 +41,11 @@
                                 </div>
                                 <div class="col-sm-auto">
                                     <div>                                        
-                                        <a class="btn btn-success add-btn" href="#"
+                                        {% comment %} <a class="btn btn-success add-btn" href="#"
                                         onclick="return abrir_modal('{% url 'inv:producto_new' %}')"
-                                        ><i class="ri-add-line align-bottom me-1"></i> Agregar</a>
-                                        {% comment %} <a class="btn btn-success add-btn" onclick="return abrir_modal('{% url 'inv:producto_new' %}')" href="#"><i
-                                                class="ri-add-line align-bottom me-1"></i> Agregar</a>{% endcomment %}
+                                        ><i class="ri-add-line align-bottom me-1"></i> Agregar</a> {% endcomment %}
+                                        <a class="btn btn-success add-btn" href="{% url 'inv:producto_new' %}"><i
+                                                class="ri-add-line align-bottom me-1"></i> Agregar</a>
                                         
                                     </div>
                                 </div>
@@ -131,9 +131,13 @@
                                                         <li class="list-inline-item edit"
                                                             data-bs-toggle="tooltip" data-bs-trigger="hover"
                                                             data-bs-placement="top" title="Edit">
-                                                            <a href="{% url 'inv:producto_edit' item.id %}"
+                                                            {% comment %} <a href="{% url 'inv:producto_edit' item.id %}"
                                                                 class="text-primary d-inline-block edit-item-btn"
                                                                 onclick="return abrir_modal('{% url 'inv:producto_edit' item.id %}')">
+                                                                <i class="ri-pencil-fill fs-16"></i>
+                                                            </a> {% endcomment %}
+                                                            <a href="{% url 'inv:producto_edit' item.id %}"
+                                                                class="text-primary d-inline-block edit-item-btn">
                                                                 <i class="ri-pencil-fill fs-16"></i>
                                                             </a>
                                                         </li>
@@ -207,7 +211,6 @@
     <!-- listjs init -->    
     <script src="{% static 'base/js/pages/producto-list.init.js' %}"></script>
     
-    
 </script>
 
 <script>
@@ -229,5 +232,6 @@
         return false;
     }
 </script>
+
 
 {% endblock %}
