@@ -1,0 +1,50 @@
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bg-light p-3">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                id="close-modal"></button>
+        </div>
+        {% if obj %}
+        <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_edit' obj.pk %}" >
+        {% else %}
+        <form method="POST" role="form" class="form-inline" action="{% url 'inv:producto_new' %}" >
+        {% endif %}
+        {% csrf_token %}
+            {% for field in form %}
+                <div class="modal-body">
+                    
+                    <div class="row">
+                        {% comment %} <div class="col-6">
+                            <div class="mb-3">
+                                <label for="compnayNameinput" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" placeholder="Ingrese Modelo" name="modelo" id="id_modelo">                            
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="lastNameinput" class="form-label">Código de Barra</label>
+                                <input type="text" class="form-control" placeholder="Ingrese Código de Barra" name="codigo_barra" id="id_codigo_barra">
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="firstNameinput" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" placeholder="Ingrese descripción" name="descripcion" id="iddescripcion">
+                            </div>
+                        </div><!--end col--> {% endcomment %}
+                        
+                        {{form.as_p}}
+                        
+                    </div><!--end row-->
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="add-btn">Guardar</button>                    
+                    </div>
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+</div>

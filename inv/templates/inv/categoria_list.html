@@ -105,7 +105,7 @@
                                                 <td class="fc">{{ item.fc|date:"d/m/Y H:i:s" }}</td>
                                                 <td class="phone">{{ item.fm|date:"d/m/Y H:i:s" }}</td>
                                                 <td class="status"><span
-                                                        class="badge badge-soft-success text-uppercase">{{ item.estado|yesno:"Activo,Inactivo" }}</span>
+                                                        class="badge {% if item.estado %} badge-soft-success {% else %} badge-soft-danger {% endif %} text-uppercase">{{ item.estado|yesno:"Activo,Inactivo" }}</span>
                                                 </td>
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">

@@ -4,7 +4,7 @@
 
 {% load static %}
 <div class="main-content">
-    
+
     <div class="page-content">
         <div class="container-fluid">
 
@@ -13,13 +13,13 @@
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0">
-                            {% if obj %} Editar {% else %} Crear {% endif %} Categoría
+                            {% if obj %} Editar {% else %} Crear {% endif %} Marca
                         </h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                <li class="breadcrumb-item active">Nueva Categoría</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Nueva Marca</li>
                             </ol>
                         </div>
 
@@ -35,24 +35,37 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Descripción</label>
+                                    {% comment %} <label class="form-label" for="product-title-input">Descripción</label>
                                     <input type="text" class="form-control" name="descripcion" id="id_descripcion"
                                         placeholder="Ingrese descripción de categoría"
-                                        value="{% if obj %} {{ obj.descripcion }} {% endif %}">
+                                        value="{% if obj %} {{ obj.descripcion }} {% endif %}"> {% endcomment %}
+                                    {{ form.marca }}
                                 </div>
+                                <div class="mb-3">
+                                    {% comment %} <label class="form-label" for="product-title-input">Descripción</label>
+                                    <input type="text" class="form-control" name="descripcion" id="id_descripcion"
+                                        placeholder="Ingrese descripción de categoría"
+                                        value="{% if obj %} {{ obj.descripcion }} {% endif %}"> {% endcomment %}
+                                    {{ form.descripcion }}
+                                </div>
+                                
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="checkbox" name="estado" id="id_estado" 
-                                    {% if obj.estado %} checked {% endif %}>
+                                    {% if obj.estado %} checked {% endif %}
+                                    {% if action|stringformat:'s' == 'A' %} checked {% endif %}>
+
                                     <label class="form-check-label" for="formCheck6">
                                         Estado
                                     </label>
                                 </div>
+
+                                <input class="form-control" data-choices data-choices-text-unique-true type="text" value="Project-A, Project-B" />
                             </div>
                         </div>
                         <!-- end card -->
 
                         <div class="text-end mb-3">
-                            <a href="{% url 'inv:categoria_list' %}" class="btn btn-light"> Cancelar</a>
+                            <a href="{% url 'inv:subcategoria_list' %}" class="btn btn-light"> Cancelar</a>
                             <button type="submit" class="btn btn-success w-sm"> Guardar</button>
                         </div>
                     </form>
@@ -88,4 +101,11 @@
 
 {% endblock %}
 {% block js_page %}
+
+<!-- choices.js -->
+        <script type='text/javascript' src="{% static 'base/libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- App js -->
+        <script src="{% static 'base/js/app.js' %}"></script>
+
 {% endblock %}

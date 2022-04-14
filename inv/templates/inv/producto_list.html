@@ -15,11 +15,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Subcategorías</h4>
+                        <h4 class="mb-sm-0">Productos</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Subcategorías</li>
+                                <li class="breadcrumb-item active">Productos</li>
                             </ol>
                         </div>
 
@@ -30,24 +30,22 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" id="subcategoryList">
+                    <div class="card" id="productoList">
                         <div class="card-header border-bottom-dashed">
 
                             <div class="row g-4 align-items-center">
                                 <div class="col-sm">
                                     <div>
-                                        <h5 class="card-title mb-0">Lista de Subcategorías</h5>
+                                        <h5 class="card-title mb-0">Lista de Productos</h5>
                                     </div>
                                 </div>
                                 <div class="col-sm-auto">
                                     <div>                                        
-                                        <a class="btn btn-success add-btn" href="{% url 'inv:subcategoria_new' %}"><i
-                                                class="ri-add-line align-bottom me-1"></i> Agregar</a>
-                                        
-                                        {% comment %} <button type="button" class="btn btn-success add-btn"
-                                            id="create-btn"
-                                            data-bs-target="#showModal"><i
-                                                class="ri-add-line align-bottom me-1"></i> Add Customer</button> {% endcomment %}
+                                        <a class="btn btn-success add-btn" href="#"
+                                        onclick="return abrir_modal('{% url 'inv:producto_new' %}')"
+                                        ><i class="ri-add-line align-bottom me-1"></i> Agregar</a>
+                                        {% comment %} <a class="btn btn-success add-btn" onclick="return abrir_modal('{% url 'inv:producto_new' %}')" href="#"><i
+                                                class="ri-add-line align-bottom me-1"></i> Agregar</a>{% endcomment %}
                                         
                                     </div>
                                 </div>
@@ -59,7 +57,7 @@
                                     <div class="col-xl-6">
                                         <div class="search-box">
                                             <input type="text" class="form-control search"
-                                                placeholder="Buscar categoría...">
+                                                placeholder="Buscar producto...">
                                             <i class="ri-search-line search-icon"></i>
                                         </div>
                                     </div>
@@ -71,7 +69,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="table-responsive table-card mb-1">
-                                    <table class="table align-middle" id="subcategoryTable">
+                                    <table class="table align-middle" id="productoTable">
                                         <thead class="table-light text-muted">
                                             <tr>
                                                 <th scope="col" style="width: 50px;">
@@ -80,8 +78,13 @@
                                                             id="checkAll" value="option">
                                                     </div>
                                                 </th>
-                                                <th class="sort" data-sort="categoria_name">Categoría</th>
-                                                <th class="sort" data-sort="subcategoria_name">Descripción</th>
+                                                <th class="sort" data-sort="subcategoria_name">Sub Cat.</th>
+                                                <th class="sort" data-sort="codigo">Código</th>
+                                                <th class="sort" data-sort="barra">Barra</th>
+                                                <th class="sort" data-sort="producto_name">Descripción</th>
+                                                <th class="sort" data-sort="existencia">Existencia</th>
+                                                <th class="sort" data-sort="marca">Marca</th>
+                                                <th class="sort" data-sort="modelo">Modelo</th>
                                                 <th class="sort" data-sort="fc">F. Creación</th>
                                                 <th class="sort" data-sort="phone">F. Modificación</th>
                                                 <th class="sort" data-sort="status">Estado</th>
@@ -100,20 +103,37 @@
                                                 <td class="id" style="display:none;"><a
                                                         href="javascript:void(0);"
                                                         class="fw-medium link-primary">{{ item.id }}</a></td>
-                                                <td class="categoria_name">{{ item.categoria }}</td>
-                                                <td class="subcategoria_name">{{ item.descripcion }}</td>
+                                                <td class="marca_name">{{ item.subcategoria }}</td>
+                                                <td class="marca_name">{{ item.codigo }}</td>
+                                                <td class="marca_name">{{ item.codigo_barra }}</td>
+                                                <td class="marca_name">{{ item.descripcion }}</td>
+                                                <td class="marca_name">{{ item.existencia }}</td>
+                                                <td class="marca_name">{{ item.marca }}</td>
+                                                <td class="marca_name">{{ item.modelo }}</td>
                                                 <td class="fc">{{ item.fc|date:"d/m/Y H:i:s" }}</td>
                                                 <td class="phone">{{ item.fm|date:"d/m/Y H:i:s" }}</td>
+                                                
+                                                {% comment %} {% if item.estado %}
+                                                <td class="status"><span
+                                                        class="badge badge-soft-success text-uppercase">{{ item.estado|yesno:"Activo,Inactivo" }}</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="status"><span
+                                                        class="badge badge-soft-danger text-uppercase">{{ item.estado|yesno:"Activo,Inactivo" }}</span>
+                                                </td>                                                
+                                                {% endif %} {% endcomment %}
                                                 <td class="status"><span
                                                         class="badge {% if item.estado %} badge-soft-success {% else %} badge-soft-danger {% endif %} text-uppercase">{{ item.estado|yesno:"Activo,Inactivo" }}</span>
                                                 </td>
+
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         <li class="list-inline-item edit"
                                                             data-bs-toggle="tooltip" data-bs-trigger="hover"
                                                             data-bs-placement="top" title="Edit">
-                                                            <a href="{% url 'inv:subcategoria_edit' item.id %}"
-                                                                class="text-primary d-inline-block edit-item-btn">
+                                                            <a href="{% url 'inv:producto_edit' item.id %}"
+                                                                class="text-primary d-inline-block edit-item-btn"
+                                                                onclick="return abrir_modal('{% url 'inv:producto_edit' item.id %}')">
                                                                 <i class="ri-pencil-fill fs-16"></i>
                                                             </a>
                                                         </li>
@@ -121,7 +141,7 @@
                                                             data-bs-trigger="hover" data-bs-placement="top"
                                                             title="Remove">
                                                             <a class="text-danger d-inline-block remove-item-btn"                                                                
-                                                                href="{% url 'inv:categoria_del' item.id %}">
+                                                                href="{% url 'inv:producto_inactivar' item.id %}">
                                                                 <i class="ri-delete-bin-5-fill fs-16"></i>
                                                             </a>
                                                         </li>
@@ -149,7 +169,7 @@
                                         </a>
                                         <ul class="pagination listjs-pagination mb-0"></ul>
                                         <a class="page-item pagination-next" href="#">
-                                            siguiente
+                                            Siguiente
                                         </a>
                                     </div>
                                 </div>
@@ -161,7 +181,9 @@
                 </div>
                 <!--end col-->
             </div>
-            <!--end row-->
+            <!--end row-->            
+
+            <div class="modal fade" id="mostrarModal" tabindex="-1"></div>
 
         </div>
         <!-- container-fluid -->
@@ -183,13 +205,29 @@
     <script src="{% static 'base/libs/list.pagination.js/list.pagination.min.js' %}"></script>
 
     <!-- listjs init -->    
-    <script src="{% static 'base/js/pages/subcategory-list.init.js' %}"></script>
+    <script src="{% static 'base/js/pages/producto-list.init.js' %}"></script>
     
     
 </script>
 
 <script>
-    
+    function abrir_modal(url)
+    {
+        $("#mostrarModal").load(url, function(){
+            $(this).modal({
+            backdrop:'static',
+            keyboard: false
+            })
+            $(this).modal('show');
+        });
+        return false;
+    }
+
+    function cerrar_modal()
+    {
+        $('#popup').modal('hide');
+        return false;
+    }
 </script>
 
 {% endblock %}
